@@ -59,7 +59,8 @@ main = do
                  "     *      `\"=\"==\"\"==,,,.,=\"==\"===\"`            ",
                  "         __.----.(\\-''#####---...___...-----._   ",
                  "       '`         \\)_`\"\"\"\"\"`                     "]
-
+    
+    createDirectoryIfMissing True $ "Aoc" ++ year
     subdirectory <- listDirectory $ "Aoc" ++ year
     mapM_ putStrLn $ zipWith (\l i -> l ++ let nums = map (drop 3) subdirectory
                                         in fromMaybe "" $ find ((== i) . read) nums) tree [25, 24..1]
