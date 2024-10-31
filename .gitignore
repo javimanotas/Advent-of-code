@@ -1,0 +1,9 @@
+# Ignore compiled executables
+*.exe
+*.out
+
+# Ignore object files and other GHC build artifacts
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
