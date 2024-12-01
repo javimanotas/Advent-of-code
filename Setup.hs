@@ -84,7 +84,25 @@ main = do
         mapM_ (`writeFile` "") inputFiles
         
         let filesDefinitions = map (\f -> f ++ "Path = \"" ++ directory ++ f ++ ".in" ++ "\"") files
-        writeFile (directory ++ file) $ init $ unlines filesDefinitions
+        writeFile (directory ++ file) $
+            "import Utils\n" ++
+            "import Data.List\n" ++
+            "import Data.Ord\n" ++
+            "import Data.Function\n" ++
+            "import Text.Parsec\n" ++
+            "import Data.Char\n" ++
+            "import Data.Maybe\n" ++
+            "import Data.Either\n" ++
+            "import Control.Monad\n" ++
+            "import qualified Data.Map as Map\n" ++
+            "import qualified Data.Set as Set\n" ++
+            "\n"++
+            init (unlines filesDefinitions) ++
+            "\n\n\n" ++
+            "main :: IO ()\n" ++
+            "main = do\n" ++
+            "   \n" ++
+            "   undefined"
 
         pure $ (directory ++ file) : inputFiles 
 
