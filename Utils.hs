@@ -12,7 +12,7 @@ import qualified Data.Map as Map
 type Memo k v = State (Map.Map k v) v
 
 evalMemo :: Memo k v -> v
-evalMemo x = evalState x Map.empty
+evalMemo = (`evalState` Map.empty)
 
 memoize :: (Ord k) => k -> Memo k v -> Memo k v
 memoize key compute = do
@@ -48,13 +48,15 @@ integral = negative <|> positive
         negative = char '-' >> (negate . read <$> many1 digit)
         positive = optional (char '+') >> (read <$> many1 digit)
 
+{-------------------- Foldables --------------------}
+
+howMany :: (Foldable f, Num b) => (a -> Bool) -> f a -> b
+howMany f = foldl (\acc x -> acc + if f x then 1 else 0) 0
+
 {-------------------- Lists --------------------}
 
 splitWhen :: (a -> Bool) -> [a] -> [[a]]
 splitWhen f = filter (not . any f) . groupBy ((==) `on` f)
-
-howMany :: (a -> Bool) -> [a] -> Int
-howMany f = length . filter f
 
 chunksOf :: Int -> [a] -> [[a]]
 chunksOf _ [] = []
@@ -73,19 +75,30 @@ intersections sets
     | null sets = Set.empty
     | otherwise = foldl1 Set.intersection sets
 
-{-------------------- Data structures --------------------}
+{-------------------- Graphs --------------------}
 
 type Graph k = Map.Map k [k]
+
+{-------------------- Matrices --------------------}
 
 type Matrix = Map.Map (Int, Int)
 
 matrixFromList :: [[a]] -> Matrix a
 matrixFromList = Map.fromList . concat . zipWith (\n -> zip (map (n, ) [0..])) [0..]
 
-{-------------------- Vectors --------------------}
+{-------------------- Vectors2D --------------------}
 
 (/+) :: Num a => (a, a) -> (a, a) -> (a, a)
 (a, b) /+ (c, d) = (a + c, b + d)
 
+(/-) :: Num a => (a, a) -> (a, a) -> (a, a)
+(a, b) /- (c, d) = (a - c, b - d)
+
 (/*) :: Num a => a -> (a, a) -> (a, a)
 k /* (a, b) = (k * a, k * b)
+
+offsets2D :: Num a => (a, a) -> [(a, a)]
+offsets2D (a, b) = [(a, b + 1), (a + 1, b), (a, b - 1), (a - 1, b)]
+
+offsetsC2D :: Num a => (a, a) -> [(a, a)] -- With corners
+offsetsC2D (a, b) = offsetsC2D (a, b) ++ [(a + 1, b + 1), (a + 1, b - 1), (a - 1, b + 1), (a - 1, b - 1)]
