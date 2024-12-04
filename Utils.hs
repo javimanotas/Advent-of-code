@@ -88,17 +88,23 @@ matrixFromList = Map.fromList . concat . zipWith (\n -> zip (map (n, ) [0..])) [
 
 {-------------------- Vectors2D --------------------}
 
+infixl 6 /+
 (/+) :: Num a => (a, a) -> (a, a) -> (a, a)
 (a, b) /+ (c, d) = (a + c, b + d)
 
+infixl 6 /-
 (/-) :: Num a => (a, a) -> (a, a) -> (a, a)
 (a, b) /- (c, d) = (a - c, b - d)
 
+infixl 7 /*
 (/*) :: Num a => a -> (a, a) -> (a, a)
 k /* (a, b) = (k * a, k * b)
 
 offsets2D :: Num a => (a, a) -> [(a, a)]
 offsets2D (a, b) = [(a, b + 1), (a + 1, b), (a, b - 1), (a - 1, b)]
 
-offsetsC2D :: Num a => (a, a) -> [(a, a)] -- With corners
-offsetsC2D (a, b) = offsetsC2D (a, b) ++ [(a + 1, b + 1), (a + 1, b - 1), (a - 1, b + 1), (a - 1, b - 1)]
+corners2D :: Num a => (a, a) -> [(a, a)]
+corners2D (a, b) = [(a + 1, b + 1), (a + 1, b - 1), (a - 1, b - 1), (a - 1, b + 1)]
+
+allOffsets2D :: Num a => (a, a) -> [(a, a)] -- With corners
+allOffsets2D = (++) <$> offsets2D <*> corners2D
