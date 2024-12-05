@@ -79,6 +79,9 @@ intersections sets
 
 type Graph k = Map.Map k [k]
 
+graphFromEdges :: Ord k => [(k, k)] -> Graph k
+graphFromEdges = foldl (\acc (x, y) -> Map.insertWith (++) x [y] acc) Map.empty
+
 {-------------------- Matrices --------------------}
 
 type Matrix = Map.Map (Int, Int)
