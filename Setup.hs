@@ -94,7 +94,7 @@ main = do
             "import Data.Function --https://hackage.haskell.org/package/base/docs/Data-Function.html \n" ++
             "import Control.Monad --https://hackage.haskell.org/package/base/docs/Control-Monad.html \n" ++
             "import Text.Parsec --https://hackage.haskell.org/package/parsec/docs/Text-Parsec.html \n" ++
-            "import qualified Data.Map as Map --https://hackage.haskell.org/package/containers/docs/Data-Map.html \n" ++
+            "import qualified Data.Map as Map --https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html \n" ++
             "import qualified Data.Set as Set --https://hackage.haskell.org/package/containers/docs/Data-Set.html \n" ++
             "\n" ++
             init (unlines filesDefinitions) ++
