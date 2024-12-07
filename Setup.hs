@@ -86,22 +86,22 @@ main = do
         let filesDefinitions = map (\f -> f ++ "Path = \"" ++ directory ++ f ++ ".in" ++ "\"") files
         writeFile (directory ++ file) $
             "import Utils\n" ++
-            "import Data.List\n" ++
-            "import Data.Ord\n" ++
-            "import Data.Function\n" ++
-            "import Text.Parsec\n" ++
-            "import Data.Char\n" ++
-            "import Data.Maybe\n" ++
-            "import Data.Either\n" ++
-            "import Control.Monad\n" ++
-            "import qualified Data.Map as Map\n" ++
-            "import qualified Data.Set as Set\n" ++
-            "\n"++
+            "import Data.List --https://hackage.haskell.org/package/base/docs/Data-List.html \n" ++
+            "import Data.Ord --https://hackage.haskell.org/package/base/docs/Data-Ord.html \n" ++
+            "import Data.Maybe --https://hackage.haskell.org/package/base/docs/Data-Maybe.html \n" ++
+            "import Data.Either --https://hackage.haskell.org/package/base/docs/Data-Either.html \n" ++
+            "import Data.Char --https://hackage.haskell.org/package/base/docs/Data-Char.html \n" ++
+            "import Data.Function --https://hackage.haskell.org/package/base/docs/Data-Function.html \n" ++
+            "import Control.Monad --https://hackage.haskell.org/package/base/docs/Control-Monad.html \n" ++
+            "import Text.Parsec --https://hackage.haskell.org/package/parsec/docs/Text-Parsec.html \n" ++
+            "import qualified Data.Map as Map --https://hackage.haskell.org/package/containers/docs/Data-Map.html \n" ++
+            "import qualified Data.Set as Set --https://hackage.haskell.org/package/containers/docs/Data-Set.html \n" ++
+            "\n" ++
             init (unlines filesDefinitions) ++
             "\n\n\n" ++
             "main :: IO ()\n" ++
             "main = do\n" ++
-            "   \n" ++
+            "\n" ++
             "   undefined"
 
         pure $ (directory ++ file) : inputFiles 
