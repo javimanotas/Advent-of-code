@@ -92,6 +92,8 @@ main = do
             "import Data.Either --https://hackage.haskell.org/package/base/docs/Data-Either.html \n" ++
             "import Data.Char --https://hackage.haskell.org/package/base/docs/Data-Char.html \n" ++
             "import Data.Function --https://hackage.haskell.org/package/base/docs/Data-Function.html \n" ++
+            "import Data.Tuple --https://hackage.haskell.org/package/base/docs/Data-Tuple.html \n" ++
+            "import Data.Foldable --https://hackage.haskell.org/package/base/docs/Data-Foldable.html \n" ++
             "import Control.Monad --https://hackage.haskell.org/package/base/docs/Control-Monad.html \n" ++
             "import Text.Parsec --https://hackage.haskell.org/package/parsec/docs/Text-Parsec.html \n" ++
             "import qualified Data.Map as Map --https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html \n" ++
