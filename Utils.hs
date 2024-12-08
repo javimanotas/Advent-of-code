@@ -3,6 +3,7 @@ module Utils where
 import Text.Parsec hiding (State)
 import Data.Function
 import Data.List
+import Data.Tuple
 import Control.Monad.State
 import qualified Data.Set as Set
 import qualified Data.Map as Map
@@ -75,12 +76,20 @@ intersections sets
     | null sets = Set.empty
     | otherwise = foldl1 Set.intersection sets
 
+{-------------------- Maps --------------------}
+
+mapFromRepeatedKeys :: Ord k => [(k, a)] -> Map.Map k [a]
+mapFromRepeatedKeys = foldl (\m (a, b) -> Map.insertWith (++) a [b] m) Map.empty
+
+inverseMap :: (Ord a, Ord b) => Map.Map a b -> Map.Map b [a]
+inverseMap = mapFromRepeatedKeys . map swap . Map.toList
+
 {-------------------- Graphs --------------------}
 
 type Graph k = Map.Map k [k]
 
 graphFromEdges :: Ord k => [(k, k)] -> Graph k
-graphFromEdges = foldl (\acc (x, y) -> Map.insertWith (++) x [y] acc) Map.empty
+graphFromEdges = mapFromRepeatedKeys
 
 {-------------------- Matrices --------------------}
 
