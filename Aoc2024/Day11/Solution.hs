@@ -1,16 +1,5 @@
 import Utils
-import Data.List --https://hackage.haskell.org/package/base/docs/Data-List.html 
-import Data.Ord --https://hackage.haskell.org/package/base/docs/Data-Ord.html 
-import Data.Maybe --https://hackage.haskell.org/package/base/docs/Data-Maybe.html 
-import Data.Either --https://hackage.haskell.org/package/base/docs/Data-Either.html 
-import Data.Char --https://hackage.haskell.org/package/base/docs/Data-Char.html 
-import Data.Function --https://hackage.haskell.org/package/base/docs/Data-Function.html 
-import Data.Tuple --https://hackage.haskell.org/package/base/docs/Data-Tuple.html 
-import Data.Foldable --https://hackage.haskell.org/package/base/docs/Data-Foldable.html 
-import Control.Monad --https://hackage.haskell.org/package/base/docs/Control-Monad.html 
 import Text.Parsec --https://hackage.haskell.org/package/parsec/docs/Text-Parsec.html 
-import qualified Data.Map as Map --https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html 
-import qualified Data.Set as Set --https://hackage.haskell.org/package/containers/docs/Data-Set.html 
 
 stonesPath = "Aoc2024/Day11/stones.in"
 
