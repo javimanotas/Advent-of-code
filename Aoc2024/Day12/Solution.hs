@@ -37,8 +37,8 @@ perimeter :: Set.Set (Int, Int) -> Int
 perimeter = howMany . flip Set.notMember <*> (foldMap offsets2D . Set.toList)
 
 
-innerSides :: Set.Set (Int, Int) -> Int
-innerSides set = sum $ map outerSides $ set : innerBlocks
+sides :: Set.Set (Int, Int) -> Int
+sides set = sum $ map outerSides $ set : innerBlocks
    where
       ((minRow, minCol), (maxRow, maxCol)) = boxBounds set
       unnused = Set.fromList [(r, c) | r <- [minRow .. maxRow]
@@ -77,4 +77,4 @@ main :: IO ()
 main = do
 
    garden <- matrixFromList <$> fileLines gardenPath
-   mapM_ (print . (`fencingPrice` garden)) [perimeter, innerSides] 
+   mapM_ (print . (`fencingPrice` garden)) [perimeter, sides] 
