@@ -4,6 +4,7 @@ import Text.Parsec hiding (State)
 import Data.Function
 import Data.List
 import Data.Tuple
+import Data.Ord
 import Control.Monad.State
 import qualified Data.Set as Set
 import qualified Data.Map as Map
@@ -53,6 +54,14 @@ integral = negative <|> positive
 
 howMany :: (Foldable f, Num b) => (a -> Bool) -> f a -> b
 howMany f = foldl (\acc x -> acc + if f x then 1 else 0) 0
+
+boxBounds :: (Num a, Ord a, Foldable t) => t (a, a) -> ((a, a), (a, a))
+boxBounds l = ((minRow, minCol), (maxRow, maxCol))
+    where
+        minRow = fst $ minimumBy (comparing fst) l
+        maxRow = fst $ maximumBy (comparing fst) l
+        minCol = snd $ minimumBy (comparing snd) l
+        maxCol = snd $ maximumBy (comparing snd) l
 
 {-------------------- Lists --------------------}
 
@@ -111,6 +120,12 @@ infixl 6 /-
 infixl 7 /*
 (/*) :: Num a => a -> (a, a) -> (a, a)
 k /* (a, b) = (k * a, k * b)
+
+turnL :: Num a => (a, a) -> (a, a)
+turnL (a, b) = (-b, a)
+
+turnR :: Num a => (a, a) -> (a, a)
+turnR (a, b) = (b, -a)
 
 offsets2D :: Num a => (a, a) -> [(a, a)]
 offsets2D (a, b) = [(a, b + 1), (a + 1, b), (a, b - 1), (a - 1, b)]
