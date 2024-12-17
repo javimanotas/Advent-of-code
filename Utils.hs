@@ -135,3 +135,21 @@ corners2D (a, b) = [(a + 1, b + 1), (a + 1, b - 1), (a - 1, b - 1), (a - 1, b + 
 
 allOffsets2D :: Num a => (a, a) -> [(a, a)] -- With corners
 allOffsets2D = (++) <$> offsets2D <*> corners2D
+
+{-------------------- Priority queues --------------------}
+
+type Prio = Ord
+
+type PQueue p a = Set.Set (p, a)
+
+emptyPQueue :: Prio p => PQueue p a
+emptyPQueue = Set.empty
+
+singletonPQueue :: Prio p => p -> a -> PQueue p a
+singletonPQueue p a = Set.singleton (p, a)
+
+dequeueWithPrio :: Prio p => PQueue p a -> ((p, a), PQueue p a)
+dequeueWithPrio = (,) . Set.findMin <*> Set.deleteMin
+
+enqueueWithPrio :: (Prio p, Ord a) => p -> a -> PQueue p a -> PQueue p a
+enqueueWithPrio p a = Set.insert (p, a)
